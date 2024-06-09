@@ -36,6 +36,16 @@
             font-size: 14px;
             font-weight: 600;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .home-icon {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
         }
 
         .content {
@@ -292,6 +302,9 @@
 <body onload="detection()">
     <div class="launcher">
         <div class="title-bar">
+            <a href="home.html">
+                <img src="assets/home-icon.png" alt="Home Icon" class="home-icon">
+            </a>
             <span>MineXLauncher 0.2.2</span>
         </div>
         <div class="content">
@@ -309,95 +322,4 @@
                             <img src="./Resources/minecraft-icon.png" alt="Minecraft Icon" class="nav-icon">
                             <span class="nav-text">Game</span>
                         </li>
-                        <li class="nav-item" onclick="redirectToSettings()">
-                            <img src="./Resources/settings-icon.png" alt="Settings Icon" class="nav-icon">
-                            <span class="nav-text">Settings</span>
-                        </li>
-                        <li class="nav-item" onclick="redirectToList()">
-                            <img src="./Resources/serverlist-icon.png" alt="List Icon" class="nav-icon">
-                            <span class="nav-text">Server List</span>
-                        </li>
-                        <li class="nav-item" id="modMakerItem" style="display: none;" onclick="createAbout('https://eaglerforge-builder.vercel.app/')">
-                            <img src="https://eaglerforge-builder.vercel.app/favicon.png" alt="List Icon" class="nav-icon"> <!-- Outsourcing Images -->
-                            <span class="nav-text">Eaglerforge Mod Maker (Block)</span>
-                        </li>
-                        <li class="nav-item" id="apiItem" style="display: none;" onclick="createAbout('https://eaglerforge.github.io/apidocs/')">
-                            <img src="https://avatars.githubusercontent.com/u/157155680?s=48&v=4" alt="List Icon" class="nav-icon">
-                            <span class="nav-text">Eaglerforge API</span>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="main-panel">
-                <div class="top-bar">
-                    <span class="game-title">News</span>
-                </div>
-                <div class="main-content">
-                    <!-- GitHub Releases -->
-                    <div class="news-item">
-                        <h3>Latest GitHub Releases</h3>
-                        <ul id="github-releases">
-                            <!-- JavaScript will populate this list -->
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="bottom-bar">
-            <span class="username" id="profile-name">MinecraftXLauncher</span>
-        </div>
-    </div>
-
-    <script>
-        // JavaScript for fetching GitHub releases and populating the list
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch('https://api.github.com/repos/SpeedSlicer/MineXLauncher-Beta/releases')
-                .then(response => response.json())
-                .then(data => {
-                    const releasesList = document.getElementById('github-releases');
-                    data.forEach(release => {
-                        const releaseItem = document.createElement('li');
-                        releaseItem.innerHTML = `
-                            <strong>${release.name}</strong>
-                            <p>${release.body}</p>
-                        `;
-                        releasesList.appendChild(releaseItem);
-                    });
-                })
-                .catch(error => console.error('Error fetching GitHub releases:', error));
-        });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Function to get a cookie value by name
-            function getCookie(name) {
-                let cookieArr = document.cookie.split(";");
-                for(let i = 0; i < cookieArr.length; i++) {
-                    let cookiePair = cookieArr[i].split("=");
-                    if(name === cookiePair[0].trim()) {
-                        return decodeURIComponent(cookiePair[1]);
-                    }
-                }
-                return null;
-            }
-
-            // Set the username placeholder from the cookie
-            let username = getCookie("username");
-            if (username != null) {
-                document.getElementById("username").placeholder = username;
-                document.getElementById("profile-name").textContent = username;
-            }
-
-            let modMakerKitEnabled = getCookie("modMakerKitEnabled");
-            if (modMakerKitEnabled === "true") {
-                document.getElementById("modMakerCheckbox").checked = true;
-                document.getElementById("modMakerItem").style.display = "flex";
-                document.getElementById("apiItem").style.display = "flex";
-            } else {
-                document.getElementById("modMakerItem").style.display = "none";
-                document.getElementById("apiItem").style.display = "none";
-            }
-        });
-    </script>
-</body>
-</html>
+                        <li class="nav-item" onclick="redirect
